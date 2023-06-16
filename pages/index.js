@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import styles from '../styles/index.module.css';
 
 const Home = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -27,18 +28,27 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Pokemon List</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Pokemon List</h1>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <ul>
+        <ul className={styles.cardList}>
           {pokemonList.map((pokemon) => (
-            <li key={pokemon.id}>
-              <Link href={`/pokemon/${pokemon.id}`}>
-                {pokemon.name}
-              </Link>
-            </li>
+            <Link href={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+              <div className={styles.myCard}>
+                <div className={styles.innerCard}>
+                  <div className={styles.frontSide}>
+                    <img className={styles.title} src={pokemon.sprites.front_default} alt={pokemon.name}></img>
+                    <p className={styles.title}>{pokemon.name}</p>
+                  </div>
+                  <div className={styles.backSide}>
+                    <img className={styles.title} src={pokemon.sprites.front_default} alt={pokemon.name}></img>
+                    <p>Leave Me</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
         </ul>
       )}
