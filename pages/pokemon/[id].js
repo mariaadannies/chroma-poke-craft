@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import classnames from 'classnames';
 
 const PokemonDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [pokemon, setPokemon] = useState(null);
+  const [isCatching, setIsCatching] = useState(false);
+  const [isCaught, setIsCaught] = useState(false);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -20,6 +22,20 @@ const PokemonDetail = () => {
 
     fetchPokemon();
   }, [id]);
+
+  const handleCatch = () => {
+    const successProbability = Math.random() < 0.5;
+
+    if (successProbability) {
+      setIsCaught(true);
+    } else {
+      alert('Oh no! The pokemon escaped!');
+    }
+  };
+
+  const handleRelease = () => {
+    setIsCaught(false);
+  };
 
   if (!pokemon) {
     return <div>Loading...</div>;
@@ -70,6 +86,14 @@ const PokemonDetail = () => {
           </li>
         ))}
       </ul>
+
+      {!isCaught ? (
+        <button disabled={isCatching} onClick={handleCatch}>
+          {isCatching ? 'Catching...' : 'Catch'}
+        </button>
+      ) : (
+        <button onClick={handleRelease}>Release</button>
+      )}
     </div>
   );
 };
