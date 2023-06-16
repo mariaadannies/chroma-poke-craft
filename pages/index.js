@@ -8,17 +8,17 @@ const Home = () => {
       <ul>
         <li>
           <Link href="/pokemon/1">
-            <a>Bulbasaur</a>
+            Bulbasaur
           </Link>
         </li>
         <li>
           <Link href="/pokemon/4">
-            <a>Charmander</a>
+            Charmander
           </Link>
         </li>
         <li>
           <Link href="/pokemon/7">
-            <a>Squirtle</a>
+            Squirtle
           </Link>
         </li>
         {/* Add more pokemons */}
