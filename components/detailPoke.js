@@ -48,10 +48,6 @@ const PokemonDetail = () => {
         }
     };
 
-    const handleRelease = () => {
-        setIsCaught(false);
-    };
-
     if (!pokemon) {
         return <div>Loading...</div>;
     }
@@ -150,23 +146,16 @@ const PokemonDetail = () => {
                         ))}
                         <tr>
                             <td colSpan="12">
-                                {!isCaught ? (
                                     <button
                                         disabled={isCatching}
                                         onClick={handleCatch}
                                         className={styles.button}
                                     >
                                         {isCatching ? 'Catching...' : 'Catch'}
-                                    </button>
-                                ) : (
-                                    <button onClick={handleRelease} className={styles.button}>
-                                        Catched
                                         <div class="hoverEffect">
                                         <div></div>
                                         </div>
                                     </button>
-
-                                )}
                             </td>
                         </tr>
                     </tbody>
