@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import classnames from 'classnames';
 import { getCollection, updateCollection } from '../utils/sessionStorage';
+import styles from '../styles/detail.module.css';
 
 const PokemonDetail = () => {
     const router = useRouter();
@@ -26,26 +27,26 @@ const PokemonDetail = () => {
 
     const handleCatch = () => {
         const successProbability = Math.random() < 0.5;
-    
+
         if (successProbability) {
-          let ownedPokemon = getCollection();
-          console.log(ownedPokemon);
-          const isAlreadyOwned = ownedPokemon.some((owned) => owned.id === pokemon.id);
- 
-          if (!isAlreadyOwned) {
-            ownedPokemon.push(pokemon);
-            updateCollection(ownedPokemon);
-            alert(`You caught ${pokemon.name}!`);
+            let ownedPokemon = getCollection();
             console.log(ownedPokemon);
-            setIsCaught(true);
-          } else {
-            alert(`You already caught ${pokemon.name}!`);
-          }
-          
+            const isAlreadyOwned = ownedPokemon.some((owned) => owned.id === pokemon.id);
+
+            if (!isAlreadyOwned) {
+                ownedPokemon.push(pokemon);
+                updateCollection(ownedPokemon);
+                alert(`You caught ${pokemon.name}!`);
+                console.log(ownedPokemon);
+                setIsCaught(true);
+            } else {
+                alert(`You already caught ${pokemon.name}!`);
+            }
+
         } else {
-          alert('Oh no! The pokemon escaped!');
+            alert('Oh no! The pokemon escaped!');
         }
-      };
+    };
 
     const handleRelease = () => {
         setIsCaught(false);
@@ -58,56 +59,119 @@ const PokemonDetail = () => {
     const { name, sprites, types, weight, height, abilities, moves, stats } = pokemon;
 
     return (
-        <div>
-            <h1>Pokemon Detail - {name}</h1>
-            <img src={sprites.front_default} alt={name} />
+        <div className={styles.dashboardContainer}>
+            <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th colSpan="12">{name}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colSpan="12"></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"></td>
+                            <td colSpan="4" rowSpan="3">
+                                <img className={styles.image} src={sprites.front_default} alt={name} />
+                            </td>
+                            <td colSpan="2">Types</td>
+                            <td colSpan="2">
+                                <ul className={styles.list}>
+                                    {types.map((type) => (
+                                        <li key={type.type.name}>{type.type.name}</li>
+                                    ))}
+                                </ul>
+                            </td>
+                            <td colSpan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"></td>
+                            <td></td>
+                            <td colSpan="2">Weight</td>
+                            <td colSpan="2">
+                                <p>{weight}</p>
+                            </td>
+                            <td colSpan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"></td>
+                            <td></td>
+                            <td colSpan="2">Height</td>
+                            <td colSpan="2">
+                                <p>{height}</p>
+                            </td>
+                            <td colSpan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="12"></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4">Moves</td>
+                            <td colSpan="4">Abilities</td>
+                            <td colSpan="4">Stats</td>
+                        </tr>
+                        {moves.map((move, index) => (
+                            <tr key={move.move.name}>
+                                {(index % 4 === 0) && (
+                                    <>
+                                        <td>{move.move.name}</td>
+                                        <td>{index + 1 < moves.length ? moves[index + 1].move.name : ''}</td>
+                                        <td>{index + 2 < moves.length ? moves[index + 2].move.name : ''}</td>
+                                        <td>{index + 3 < moves.length ? moves[index + 3].move.name : ''}</td>
+                                    </>
+                                )}
+                                {index === 0 && (
+                                    <td colSpan="4" rowSpan={moves.length}>
+                                        <ul className={styles.list}>
+                                            {abilities.map((ability) => (
+                                                <li key={ability.ability.name}>{ability.ability.name}</li>
+                                            ))}
+                                        </ul>
+                                    </td>
+                                )}
+                                {index === 0 && (
+                                    <td colSpan="4" rowSpan={moves.length}>
+                                        <ul className={styles.list}>
+                                            {stats.map((stat) => (
+                                                <li
+                                                    key={stat.stat.name}
+                                                    className={`${styles.listItem} ${stat.base_stat >= 60 ? styles.goodStat : ''}`}
+                                                >
+                                                    <span>{stat.stat.name}</span>
+                                                    <span>{stat.base_stat}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </td>
+                                )}
+                            </tr>
+                        ))}
+                        <tr>
+                            <td colSpan="12">
+                                {!isCaught ? (
+                                    <button
+                                        disabled={isCatching}
+                                        onClick={handleCatch}
+                                        className={styles.button}
+                                    >
+                                        {isCatching ? 'Catching...' : 'Catch'}
+                                    </button>
+                                ) : (
+                                    <button onClick={handleRelease} className={styles.button}>
+                                        Catched
+                                        <div class="hoverEffect">
+                                        <div></div>
+                                        </div>
+                                    </button>
 
-            <h2>Type</h2>
-            <ul>
-                {types.map((type) => (
-                    <li key={type.type.name}>{type.type.name}</li>
-                ))}
-            </ul>
-
-            <h2>Weight</h2>
-            <p>{weight}</p>
-
-            <h2>Height</h2>
-            <p>{height}</p>
-
-            <h2>Abilities</h2>
-            <ul>
-                {abilities.map((ability) => (
-                    <li key={ability.ability.name}>{ability.ability.name}</li>
-                ))}
-            </ul>
-
-            <h2>Moves</h2>
-            <ul>
-                {moves.map((move) => (
-                    <li key={move.move.name}>{move.move.name}</li>
-                ))}
-            </ul>
-
-            <h2>Stats</h2>
-            <ul>
-                {stats.map((stat) => (
-                    <li
-                        key={stat.stat.name}
-                        className={classnames({ 'is-good': stat.base_stat >= 60 })}
-                    >
-                        {stat.stat.name}: {stat.base_stat}
-                    </li>
-                ))}
-            </ul>
-
-            {!isCaught ? (
-                <button disabled={isCatching} onClick={handleCatch}>
-                    {isCatching ? 'Catching...' : 'Catch'}
-                </button>
-            ) : (
-                <button onClick={handleRelease}>Release</button>
-            )}
+                                )}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
