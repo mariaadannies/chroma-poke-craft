@@ -1,42 +1,27 @@
-// OwnedPokemonPage.js
-
-import React, { useState, useEffect } from 'react';
+import { getCollection, updateCollection } from '../utils/sessionStorage';
 
 const OwnedPokemonPage = () => {
-  const [ownedPokemons, setOwnedPokemons] = useState([]);
+  const collection = getCollection();
+  console.log(collection);
 
-  useEffect(() => {
-    // Retrieve owned pokemons from localStorage
-    const storedPokemons = localStorage.getItem('ownedPokemons');
-    if (storedPokemons) {
-      setOwnedPokemons(JSON.parse(storedPokemons));
-    }
-  }, []);
+  const handleRelease = (pokemon) => {
+    // Remove the released Pokémon from the collection
+    const updatedCollection = collection.filter((p) => p.id !== pokemon.id);
+    updateCollection(updatedCollection);
 
-  const releasePokemon = (pokemonId) => {
-    // Remove the pokemon from ownedPokemons array
-    const updatedPokemons = ownedPokemons.filter((pokemon) => pokemon.id !== pokemonId);
-    setOwnedPokemons(updatedPokemons);
-    // Update localStorage
-    localStorage.setItem('ownedPokemons', JSON.stringify(updatedPokemons));
+    alert(`You released ${pokemon.name} from your collection.`);
   };
 
   return (
     <div>
-      <h2>Owned Pokemons</h2>
-      {ownedPokemons.length > 0 ? (
-        <ul>
-          {ownedPokemons.map((pokemon) => (
-            <li key={pokemon.id}>
-              <img src={pokemon.image} alt={pokemon.name} />
-              <span>{pokemon.name}</span>
-              <button onClick={() => releasePokemon(pokemon.id)}>Release</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No pokemons owned yet.</p>
-      )}
+      <h2>Owned Pokémon</h2>
+      <ul>
+        {collection.map((pokemon) => (
+          <li key={pokemon.id}>
+            {pokemon.name} <button onClick={() => handleRelease(pokemon)}>Release</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
