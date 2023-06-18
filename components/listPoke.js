@@ -42,9 +42,11 @@ const ListPoke = () => {
                 <div className={styles.innerCard}>
                   <div className={styles.frontSide}>
                     <img className={styles.title} src={pokemon.sprites.front_default} alt={pokemon.name}></img>
+                    <p className={styles.title}>{pokemon.name}</p>
                   </div>
                   <div className={styles.backSide}>
                     <p className={styles.title}>{pokemon.name}</p>
+                    <p >Detail</p>
                   </div>
                 </div>
               </div>

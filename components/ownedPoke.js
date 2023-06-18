@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/index.module.css';
 
-const OwnedPokemonPage = () => {
+
+const OwnedPokemon = () => {
     const [collection, setCollection] = useState([]);
 
     useEffect(() => {
@@ -32,7 +33,7 @@ const OwnedPokemonPage = () => {
 
     return (
         <div className={styles.container}>
-            <h2>Owned Pokémon</h2>
+            <h1 className={styles.title}>Owned Pokemon</h1>
             <br></br>
             <br></br>
             {collection.length === 0 ? (
@@ -59,4 +60,4 @@ const OwnedPokemonPage = () => {
     );
 };
 
-export default OwnedPokemonPage;
+export default OwnedPokemon;

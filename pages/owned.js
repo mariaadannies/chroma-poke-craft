@@ -4,10 +4,10 @@ import OwnedPoke from '../components/ownedPoke';
 
 const OwnedPokemon = () => {
   return (
-      <div className={styles.container}>
-        <OwnedPoke />
-      </div>
-    );
+    <div className={styles.container}>
+      <OwnedPoke />
+    </div>
+  );
 };
 
 export default OwnedPokemon;

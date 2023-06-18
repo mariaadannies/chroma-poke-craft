@@ -1,40 +1,39 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .cardList {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
-  }
-  
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .pokemonImage {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .pokemonName {
-    font-weight: bold;
-  }
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.cardList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pokemonImage {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.pokemonName {
+  font-weight: bold;
+}
 
 .myCard {
   background-color: transparent;
