@@ -60,7 +60,9 @@ const PokemonDetail = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th colSpan="12">{name}</th>
+                            <th colSpan="12">
+                                <h1 className={styles.title}>{name}</h1>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +74,10 @@ const PokemonDetail = () => {
                             <td colSpan="4" rowSpan="3">
                                 <img className={styles.image} src={sprites.front_default} alt={name} />
                             </td>
-                            <td colSpan="2">Types</td>
+                            <td></td>
+                            <td colSpan="2">
+                                <p className={styles.title}>Types</p>
+                            </td>
                             <td colSpan="2">
                                 <ul className={styles.list}>
                                     {types.map((type) => (
@@ -133,10 +138,9 @@ const PokemonDetail = () => {
                                             {stats.map((stat) => (
                                                 <li
                                                     key={stat.stat.name}
-                                                    className={`${styles.listItem} ${stat.base_stat >= 60 ? styles.goodStat : ''}`}
+                                                    className={`${styles.listItem}`}
                                                 >
-                                                    <span>{stat.stat.name}</span>
-                                                    <span>{stat.base_stat}</span>
+                                                    <span>{stat.stat.name} : {stat.base_stat}</span>
                                                 </li>
                                             ))}
                                         </ul>
