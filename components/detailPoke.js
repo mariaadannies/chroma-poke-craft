@@ -70,11 +70,9 @@ const PokemonDetail = () => {
                             <td colSpan="12"></td>
                         </tr>
                         <tr>
-                            <td colSpan="2"></td>
-                            <td colSpan="4" rowSpan="3">
+                            <td colSpan="6" rowSpan="3">
                                 <img className={styles.image} src={sprites.front_default} alt={name} />
                             </td>
-                            <td></td>
                             <td colSpan="2">
                                 <p className={styles.title}>Types</p>
                             </td>
@@ -85,81 +83,81 @@ const PokemonDetail = () => {
                                     ))}
                                 </ul>
                             </td>
-                            <td colSpan="2"></td>
                         </tr>
                         <tr>
-                            <td colSpan="2"></td>
-                            <td></td>
                             <td colSpan="2">Weight</td>
                             <td colSpan="2">
                                 <p>{weight}</p>
                             </td>
-                            <td colSpan="2"></td>
                         </tr>
                         <tr>
-                            <td colSpan="2"></td>
-                            <td></td>
                             <td colSpan="2">Height</td>
                             <td colSpan="2">
                                 <p>{height}</p>
                             </td>
-                            <td colSpan="2"></td>
                         </tr>
                         <tr>
                             <td colSpan="12"></td>
                         </tr>
                         <tr>
-                            <td colSpan="4">Moves</td>
-                            <td colSpan="4">Abilities</td>
-                            <td colSpan="4">Stats</td>
+                            <td colSpan="12">Moves</td>
                         </tr>
                         {moves.map((move, index) => (
                             <tr key={move.move.name}>
-                                {(index % 4 === 0) && (
+                                {(index % 10 === 0) && (
                                     <>
                                         <td>{move.move.name}</td>
                                         <td>{index + 1 < moves.length ? moves[index + 1].move.name : ''}</td>
                                         <td>{index + 2 < moves.length ? moves[index + 2].move.name : ''}</td>
                                         <td>{index + 3 < moves.length ? moves[index + 3].move.name : ''}</td>
+                                        <td>{index + 4 < moves.length ? moves[index + 4].move.name : ''}</td>
+                                        <td>{index + 5 < moves.length ? moves[index + 5].move.name : ''}</td>
+                                        <td>{index + 6 < moves.length ? moves[index + 6].move.name : ''}</td>
+                                        <td>{index + 7 < moves.length ? moves[index + 7].move.name : ''}</td>
+                                        <td>{index + 8 < moves.length ? moves[index + 8].move.name : ''}</td>
+                                        <td>{index + 9 < moves.length ? moves[index + 9].move.name : ''}</td>
+                                        <td>{index + 10 < moves.length ? moves[index + 10].move.name : ''}</td>
                                     </>
-                                )}
-                                {index === 0 && (
-                                    <td colSpan="4" rowSpan={moves.length}>
-                                        <ul className={styles.list}>
-                                            {abilities.map((ability) => (
-                                                <li key={ability.ability.name}>{ability.ability.name}</li>
-                                            ))}
-                                        </ul>
-                                    </td>
-                                )}
-                                {index === 0 && (
-                                    <td colSpan="4" rowSpan={moves.length}>
-                                        <ul className={styles.list}>
-                                            {stats.map((stat) => (
-                                                <li
-                                                    key={stat.stat.name}
-                                                    className={`${styles.listItem}`}
-                                                >
-                                                    <span>{stat.stat.name} : {stat.base_stat}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </td>
                                 )}
                             </tr>
                         ))}
                         <tr>
+                            <td colSpan="4">Abilities</td>
+                            <td colSpan="4">Stats</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" rowSpan={moves.length}>
+                                <ul className={styles.list}>
+                                    {abilities.map((ability) => (
+                                        <li key={ability.ability.name}>{ability.ability.name}</li>
+                                    ))}
+                                </ul>
+                            </td>
+                            <td colSpan="4" rowSpan={moves.length}>
+                                <ul className={styles.list}>
+                                    {stats.map((stat) => (
+                                        <li
+                                            key={stat.stat.name}
+                                            className={`${styles.listItem}`}
+                                        >
+                                            <span>{stat.stat.name} : {stat.base_stat}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colSpan="12">
-                                    <button
-                                        disabled={isCatching}
-                                        onClick={handleCatch}
-                                        className={styles.button}
-                                    >
-                                        {isCatching ? 'Catching...' : 'Catch'}
-                                        <div class="hoverEffect">
+                                <button
+                                    disabled={isCatching}
+                                    onClick={handleCatch}
+                                    className={styles.button}
+                                >
+                                    {isCatching ? 'Catching...' : 'Catch'}
+                                    <div class="hoverEffect">
                                         <div></div>
-                                        </div>
-                                    </button>
+                                    </div>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
