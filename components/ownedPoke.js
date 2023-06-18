@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/index.module.css';
-
 
 const OwnedPokemon = () => {
     const [collection, setCollection] = useState([]);
@@ -49,7 +48,7 @@ const OwnedPokemon = () => {
                                 </div>
                                 <div className={styles.backSide}>
                                     <p className={styles.title}>{pokemon.name}</p>
-                                    <button onClick={() => handleRelease(pokemon)}>Release</button>
+                                    <p onClick={() => handleRelease(pokemon)}>Release</p>
                                 </div>
                             </div>
                         </div>
